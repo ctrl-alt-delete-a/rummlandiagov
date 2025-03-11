@@ -23,27 +23,39 @@
             font-family: Arial, sans-serif;
             margin: 20px;
             padding: 20px;
-            background-color: #f4f4f4;
+            background-color: #1E293B; /* Mörk bakgrund */
+            color: white;
         }
 
         .language-selector {
             position: fixed;
             top: 10px;
             right: 10px;
-            color: white;
             display: flex;
             align-items: center;
             cursor: pointer;
-            font-size: 16px;
-            background: none; /* Tar bort bakgrunden */
-            padding: 0; /* Tar bort padding */
-            border-radius: 0; /* Tar bort rundade hörn */
+            font-size: 14px;
+            font-weight: 600;
+            color: #CBD5E1; /* Ljusgrå textfärg */
         }
 
         .globe-icon {
             width: 20px;
             height: 20px;
-            margin-right: 8px;
+            margin-right: 6px;
+        }
+
+        /* Liknande Tailwind-stil */
+        .text-sm {
+            font-size: 14px;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .text-textColor1 {
+            color: #CBD5E1; /* Ljusgrå text */
         }
 
         [data-lang="en"] {
@@ -53,7 +65,7 @@
 </head>
 <body>
 
-    <div class="language-selector" onclick="changeLanguage(document.getElementById('language-text').textContent === 'SV' ? 'en' : 'sv')">
+    <div class="language-selector text-sm font-semibold text-textColor1" onclick="changeLanguage(document.getElementById('language-text').textContent === 'SV' ? 'en' : 'sv')">
         <img src="globe.png" alt="🌍" class="globe-icon">
         <span id="language-text">SV</span>
     </div>
