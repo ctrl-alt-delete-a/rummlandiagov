@@ -4,25 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rummlandias Regering</title>
-        <script>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Funktion för att byta språk och spara valet
         function changeLanguage(lang) {
+            localStorage.setItem("selectedLanguage", lang); // Sparar språket i localStorage
             document.querySelectorAll('[data-lang]').forEach(el => {
                 el.style.display = el.getAttribute('data-lang') === lang ? 'block' : 'none';
             });
         }
+
+        // Kollar vilket språk som var valt tidigare och sätter det
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedLanguage = localStorage.getItem("selectedLanguage") || "sv"; // Standard: svenska
+            document.getElementById("languageSelect").value = savedLanguage;
+            changeLanguage(savedLanguage);
+        });
     </script>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; }
-        h1 { color: darkblue; }
-        .container { padding: 20px; background: white; margin: 50px auto; width: 80%; border-radius: 10px; }
-    </style>
 </head>
 <body>
-    <div class="container">
+
+    <!-- Språkval -->
+    <label for="languageSelect">🌍 Välj språk:</label>
+    <select id="languageSelect" onchange="changeLanguage(this.value)">
+        <option value="sv">Svenska</option>
+        <option value="en">English</option>
+    </select>
+
+    <!-- Svenska versionen -->
+    <div data-lang="sv">
         <h1>Välkommen till Rummlandias Regering</h1>
         <p>Den officiella sidan för Rummlandias regering.</p>
-        <p>👑 Ledare: Prins Alexander</p>
-        <p>📜 Historia: Rummlandia grundades år tretusenfemtio</p>
+        <h2>👑 Ledare: Prins Alexander</h2>
+        <p>📜 Historia: Rummlandia grundades år tretusenfemtio.</p>
     </div>
+
+    <!-- Engelska versionen -->
+    <div data-lang="en" style="display: none;">
+        <h1>Welcome to the Government of Rummlandia</h1>
+        <p>The official page for the government of Rummlandia.</p>
+        <h2>👑 Leader: Prince Alexander</h2>
+        <p>📜 History: Rummlandia was founded in the year 3050.</p>
+    </div>
+
 </body>
 </html>
