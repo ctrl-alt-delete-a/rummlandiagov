@@ -4,20 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rummlandias Regering</title>
+    
     <script>
+        // Funktion för att byta språk och spara valet
         function changeLanguage(lang) {
-            localStorage.setItem("selectedLanguage", lang);
+            localStorage.setItem("selectedLanguage", lang); // Sparar språket i localStorage
             document.querySelectorAll('[data-lang]').forEach(el => {
                 el.style.display = el.getAttribute('data-lang') === lang ? 'block' : 'none';
             });
         }
 
+        // Kollar vilket språk som var valt tidigare och sätter det
         document.addEventListener("DOMContentLoaded", () => {
-            const savedLanguage = localStorage.getItem("selectedLanguage") || "sv";
+            const savedLanguage = localStorage.getItem("selectedLanguage") || "sv"; // Standard: svenska
             document.getElementById("languageSelect").value = savedLanguage;
             changeLanguage(savedLanguage);
         });
     </script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -37,24 +41,22 @@
             border-radius: 20px;
             display: flex;
             align-items: center;
-            gap: 8px;
             cursor: pointer;
             font-size: 16px;
-            white-space: nowrap;
         }
 
         .language-selector:hover {
             background-color: #1a252f;
         }
 
-        /* Ikon för glob */
         .globe-icon {
             width: 20px;
             height: 20px;
+            margin-right: 8px;
         }
 
-        /* Dropdown */
-        #languageSelect {
+        /* Gömmer den vanliga select-menyn */
+        select {
             background: none;
             border: none;
             color: white;
@@ -62,17 +64,13 @@
             cursor: pointer;
             outline: none;
         }
-
-        #languageSelect option {
-            color: black;
-        }
     </style>
 </head>
 <body>
 
     <!-- Språkväxlare -->
-    <div class="language-selector">
-        <img src="globe.png" alt="Globe Icon" class="globe-icon">
+    <div class="language-selector" onclick="document.getElementById('languageSelect').click()">
+        <img src="globe.png" alt="Globe" class="globe-icon">
         <select id="languageSelect" onchange="changeLanguage(this.value)">
             <option value="sv">SV</option>
             <option value="en">EN</option>
