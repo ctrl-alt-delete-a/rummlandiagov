@@ -12,43 +12,26 @@
             document.querySelectorAll('[data-lang]').forEach(el => {
                 el.style.display = el.getAttribute('data-lang') === lang ? 'block' : 'none';
             });
+            document.getElementById("language-text").textContent = lang.toUpperCase(); // Uppdaterar texten i språkväxlaren
         }
 
         // Kollar vilket språk som var valt tidigare och sätter det
         document.addEventListener("DOMContentLoaded", () => {
             const savedLanguage = localStorage.getItem("selectedLanguage") || "sv"; // Standard: svenska
-            document.getElementById("languageSelect").value = savedLanguage;
             changeLanguage(savedLanguage);
         });
+
+        // Växlar mellan språk när man klickar
+        function toggleLanguage() {
+            const currentLang = localStorage.getItem("selectedLanguage") || "sv";
+            const newLang = currentLang === "sv" ? "en" : "sv";
+            changeLanguage(newLang);
+        }
     </script>
 </head>
 <body>
-
-    <!-- Språkval -->
-    <label for="languageSelect">🌍 Välj språk:</label>
-    <select id="languageSelect" onchange="changeLanguage(this.value)">
-        <option value="sv">Svenska</option>
-        <option value="en">English</option>
-    </select>
-
-    <!-- Svenska versionen -->
-    <div data-lang="sv">
-        <h1>Välkommen till Rummlandias Regering</h1>
-        <p>Den officiella sidan för Rummlandias regering.</p>
-        <h2>👑 Ledare: Prins Alexander</h2>
-        <p>📜 Historia: Rummlandia grundades år tretusenfemtio.</p>
-    </div>
-
-    <!-- Engelska versionen -->
-    <div data-lang="en" style="display: none;">
-        <h1>Welcome to the Government of Rummlandia</h1>
-        <p>The official page for the government of Rummlandia.</p>
-        <h2>👑 Leader: Prince Alexander</h2>
-        <p>📜 History: Rummlandia was founded in the year 3050.</p>
-    </div>
-
-    <style>
-        body {
+<style>
+    body {
     font-family: Arial, sans-serif;
     margin: 20px;
     padding: 20px;
@@ -68,17 +51,43 @@
     align-items: center;
     cursor: pointer;
     font-size: 16px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease;
 }
 
 .language-selector:hover {
     background-color: #1a252f;
 }
 
+/* Stil för globikonen */
 .globe-icon {
+    width: 20px;  /* Anpassa storleken på din PNG-glob */
+    height: 20px;
     margin-right: 8px;
 }
 
-    </style>
+</style>
+    <!-- Språkväxlare (med PNG-globikon) -->
+    <div class="language-selector" onclick="toggleLanguage()">
+        <img src="globe.png" alt="Globe Icon" class="globe-icon">
+        <span id="language-text">SV</span>
+    </div>
+
+    <!-- Svenska versionen -->
+    <div data-lang="sv">
+        <h1>Välkommen till Rummlandias Regering</h1>
+        <p>Den officiella sidan för Rummlandias regering.</p>
+        <h2>👑 Ledare: Prins Alexander</h2>
+        <p>📜 Historia: Rummlandia grundades år tretusenfemtio.</p>
+    </div>
+
+    <!-- Engelska versionen -->
+    <div data-lang="en" style="display: none;">
+        <h1>Welcome to the Government of Rummlandia</h1>
+        <p>The official page for the government of Rummlandia.</p>
+        <h2>👑 Leader: Prince Alexander</h2>
+        <p>📜 History: Rummlandia was founded in the year 3050.</p>
+    </div>
 
 </body>
 </html>
