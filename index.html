@@ -21,22 +21,45 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
+            margin: 0;
+            padding: 0;
             background-color: #1E293B; /* Mörk bakgrund */
             color: white;
         }
 
+        /* Toppmeny */
+        .top-menu {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #1E293B;
+            padding: 10px 20px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FACC15; /* Gul text för att likna mongolska sidan */
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        /* Språkväxlare */
         .language-selector {
-            position: fixed;
-            top: 10px;
-            right: 10px;
             display: flex;
             align-items: center;
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
-            color: #CBD5E1; /* Ljusgrå textfärg */
+            color: #CBD5E1; /* Ljusgrå text */
+            padding: 5px 10px;
+            border-radius: 20px;
         }
 
         .globe-icon {
@@ -45,44 +68,75 @@
             margin-right: 6px;
         }
 
-        /* Liknande Tailwind-stil */
-        .text-sm {
+        /* Datum */
+        .date {
             font-size: 14px;
-        }
-
-        .font-semibold {
             font-weight: 600;
+            color: #CBD5E1;
+            display: flex;
+            align-items: center;
         }
 
-        .text-textColor1 {
-            color: #CBD5E1; /* Ljusgrå text */
+        .calendar-icon {
+            width: 18px;
+            height: 18px;
+            margin-right: 6px;
         }
 
-        [data-lang="en"] {
-            display: none;
+        /* Huvudinnehåll */
+        .container {
+            padding: 20px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <div class="language-selector text-sm font-semibold text-textColor1" onclick="changeLanguage(document.getElementById('language-text').textContent === 'SV' ? 'en' : 'sv')">
-        <img src="globe.png" alt="🌍" class="globe-icon">
-        <span id="language-text">SV</span>
+    <!-- Toppmeny -->
+    <div class="top-menu">
+        <!-- Logotyp -->
+        <div class="logo">
+            <img src="globe.png" alt="🌍"> <!-- Ändra till din riktiga logotyp -->
+            <span>Rummlandia</span>
+        </div>
+
+        <!-- Språkväxlare -->
+        <div class="language-selector" onclick="changeLanguage(document.getElementById('language-text').textContent === 'SV' ? 'en' : 'sv')">
+            <img src="globe.png" alt="🌍" class="globe-icon">
+            <span id="language-text">SV</span>
+        </div>
+
+        <!-- Datum -->
+        <div class="date">
+            <img src="calendar-icon.png" alt="📅" class="calendar-icon"> <!-- Du kan byta ut mot en kalenderikon -->
+            <span id="current-date"></span>
+        </div>
     </div>
 
-    <div data-lang="sv">
-        <h1>Välkommen till Rummlandias Regering</h1>
-        <p>Den officiella sidan för Rummlandias regering.</p>
-        <h2>👑 Ledare: Prins Alexander</h2>
-        <p>📜 Historia: Rummlandia grundades år 3050.</p>
+    <!-- Huvudinnehåll -->
+    <div class="container">
+        <div data-lang="sv">
+            <h1>Välkommen till Rummlandias Regering</h1>
+            <p>Den officiella sidan för Rummlandias regering.</p>
+            <h2>👑 Ledare: Prins Alexander</h2>
+            <p>📜 Historia: Rummlandia grundades år 3050.</p>
+        </div>
+
+        <div data-lang="en">
+            <h1>Welcome to the Government of Rummlandia</h1>
+            <p>The official page for the government of Rummlandia.</p>
+            <h2>👑 Leader: Prince Alexander</h2>
+            <p>📜 History: Rummlandia was founded in the year 3050.</p>
+        </div>
     </div>
 
-    <div data-lang="en">
-        <h1>Welcome to the Government of Rummlandia</h1>
-        <p>The official page for the government of Rummlandia.</p>
-        <h2>👑 Leader: Prince Alexander</h2>
-        <p>📜 History: Rummlandia was founded in the year 3050.</p>
-    </div>
+    <script>
+        // Sätter aktuellt datum i toppmenyn
+        document.getElementById("current-date").textContent = new Date().toLocaleDateString("sv-SE", {
+            day: "2-digit",
+            month: "2-digit"
+        });
+    </script>
 
 </body>
 </html>
