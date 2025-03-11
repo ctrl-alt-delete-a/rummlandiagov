@@ -5,18 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rummlandias Regering</title>
     <script>
-        // Funktion för att byta språk och spara valet
         function changeLanguage(lang) {
-            localStorage.setItem("selectedLanguage", lang); // Sparar språket i localStorage
+            localStorage.setItem("selectedLanguage", lang);
             document.querySelectorAll('[data-lang]').forEach(el => {
                 el.style.display = el.getAttribute('data-lang') === lang ? 'block' : 'none';
             });
-            document.getElementById("language-text").textContent = lang.toUpperCase(); // Uppdatera texten
+            document.getElementById("language-text").textContent = lang.toUpperCase();
         }
 
-        // Kollar vilket språk som var valt tidigare och sätter det
         document.addEventListener("DOMContentLoaded", () => {
-            const savedLanguage = localStorage.getItem("selectedLanguage") || "sv"; // Standard: svenska
+            const savedLanguage = localStorage.getItem("selectedLanguage") || "sv";
             changeLanguage(savedLanguage);
         });
     </script>
@@ -28,23 +26,18 @@
             background-color: #f4f4f4;
         }
 
-        /* Språkväxlare */
         .language-selector {
             position: fixed;
             top: 10px;
             right: 10px;
-            background-color: #2c3e50;
             color: white;
-            padding: 10px 15px;
-            border-radius: 20px;
             display: flex;
             align-items: center;
             cursor: pointer;
             font-size: 16px;
-        }
-
-        .language-selector:hover {
-            background-color: #1a252f;
+            background: none; /* Tar bort bakgrunden */
+            padding: 0; /* Tar bort padding */
+            border-radius: 0; /* Tar bort rundade hörn */
         }
 
         .globe-icon {
@@ -53,7 +46,6 @@
             margin-right: 8px;
         }
 
-        /* Dölj engelska språket från början */
         [data-lang="en"] {
             display: none;
         }
@@ -61,13 +53,11 @@
 </head>
 <body>
 
-    <!-- Språkval med ikon -->
     <div class="language-selector" onclick="changeLanguage(document.getElementById('language-text').textContent === 'SV' ? 'en' : 'sv')">
         <img src="globe.png" alt="🌍" class="globe-icon">
         <span id="language-text">SV</span>
     </div>
 
-    <!-- Svenska versionen -->
     <div data-lang="sv">
         <h1>Välkommen till Rummlandias Regering</h1>
         <p>Den officiella sidan för Rummlandias regering.</p>
@@ -75,7 +65,6 @@
         <p>📜 Historia: Rummlandia grundades år 3050.</p>
     </div>
 
-    <!-- Engelska versionen -->
     <div data-lang="en">
         <h1>Welcome to the Government of Rummlandia</h1>
         <p>The official page for the government of Rummlandia.</p>
