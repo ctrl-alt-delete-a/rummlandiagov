@@ -7,34 +7,39 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
-            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            background-color: #2c3e50;
+            color: white;
         }
+
         .top-bar {
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            background-color: #2c3e50;
             padding: 10px 20px;
-            border-radius: 10px;
+            background-color: #1a252f;
         }
+
         .language-selector, .minister-button {
             display: flex;
             align-items: center;
-            background-color: #34495e;
+            background-color: #2c3e50;
             color: white;
-            padding: 8px 15px;
+            padding: 10px 15px;
             border-radius: 20px;
-            margin-left: 10px;
             cursor: pointer;
             font-size: 16px;
+            border: none;
+            margin-left: 10px;
             text-decoration: none;
         }
+
         .language-selector:hover, .minister-button:hover {
-            background-color: #1a252f;
+            background-color: #3b4f63;
         }
-        .globe-icon {
+
+        .language-selector img {
             width: 20px;
             height: 20px;
             margin-right: 8px;
@@ -47,6 +52,7 @@
                 el.style.display = el.getAttribute('data-lang') === lang ? 'block' : 'none';
             });
         }
+
         document.addEventListener("DOMContentLoaded", () => {
             const savedLanguage = localStorage.getItem("selectedLanguage") || "sv";
             changeLanguage(savedLanguage);
@@ -54,14 +60,21 @@
     </script>
 </head>
 <body>
+
     <div class="top-bar">
+        <!-- Språkknapp -->
+        <button class="language-selector" onclick="changeLanguage('sv')">
+            <img src="globe.png" alt="Globe"> SV
+        </button>
+        <button class="language-selector" onclick="changeLanguage('en')">
+            <img src="globe.png" alt="Globe"> EN
+        </button>
+
+        <!-- Knapp till ministrarna -->
         <a href="ministrar.html" class="minister-button">Se alla ministrar</a>
-        <div class="language-selector" onclick="changeLanguage(this.getAttribute('data-lang') === 'sv' ? 'en' : 'sv')">
-            <img src="globe.png" alt="Globe Icon" class="globe-icon">
-            <span id="languageText">SV</span>
-        </div>
     </div>
 
+    <!-- Svenska versionen -->
     <div data-lang="sv">
         <h1>Välkommen till Rummlandias Regering</h1>
         <p>Den officiella sidan för Rummlandias regering.</p>
@@ -69,11 +82,13 @@
         <p>📜 Historia: Rummlandia grundades år tretusenfemtio.</p>
     </div>
 
+    <!-- Engelska versionen -->
     <div data-lang="en" style="display: none;">
         <h1>Welcome to the Government of Rummlandia</h1>
         <p>The official page for the government of Rummlandia.</p>
         <h2>👑 Leader: Prince Alexander</h2>
         <p>📜 History: Rummlandia was founded in the year 3050.</p>
     </div>
+
 </body>
 </html>
