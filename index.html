@@ -46,31 +46,35 @@
         }
     </style>
     <script>
-        function changeLanguage(lang) {
-            localStorage.setItem("selectedLanguage", lang);
+        function toggleLanguage() {
+            let currentLang = localStorage.getItem("selectedLanguage") || "sv";
+            let newLang = currentLang === "sv" ? "en" : "sv";
+
+            localStorage.setItem("selectedLanguage", newLang);
             document.querySelectorAll('[data-lang]').forEach(el => {
-                el.style.display = el.getAttribute('data-lang') === lang ? 'block' : 'none';
+                el.style.display = el.getAttribute('data-lang') === newLang ? 'block' : 'none';
             });
+
+            // Uppdatera texten på knappen
+            document.getElementById("languageButton").innerHTML = `<img src="globe.png" alt="Globe"> ${newLang.toUpperCase()}`;
         }
 
         document.addEventListener("DOMContentLoaded", () => {
-            const savedLanguage = localStorage.getItem("selectedLanguage") || "sv";
-            changeLanguage(savedLanguage);
+            let savedLanguage = localStorage.getItem("selectedLanguage") || "sv";
+            document.getElementById("languageButton").innerHTML = `<img src="globe.png" alt="Globe"> ${savedLanguage.toUpperCase()}`;
+            toggleLanguage(); // Sätter rätt språk vid start
         });
     </script>
 </head>
 <body>
 
     <div class="top-bar">
-        <!-- Språkknapp -->
-        <button class="language-selector" onclick="changeLanguage('sv')">
+        <!-- Språkknappen -->
+        <button id="languageButton" class="language-selector" onclick="toggleLanguage()">
             <img src="globe.png" alt="Globe"> SV
         </button>
-        <button class="language-selector" onclick="changeLanguage('en')">
-            <img src="globe.png" alt="Globe"> EN
-        </button>
 
-        <!-- Knapp till ministrarna -->
+        <!-- Knappen för att se alla ministrar -->
         <a href="ministrar.html" class="minister-button">Se alla ministrar</a>
     </div>
 
