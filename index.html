@@ -85,26 +85,27 @@
         }
 
         function detectLanguage() {
-            fetch('https://ipapi.co/json/')
-                .then(response => response.json())
-                .then(data => {
-                    let country = data.country_code;
-                    let lang = "en"; // Standard till engelska
+            let browserLang = navigator.language || navigator.userLanguage;
+            let lang = "en"; // Standard till engelska
 
-                    if (country === "SE") {
-                        lang = "sv"; // Svenska i Sverige
-                    } else if (["US", "GB", "CA", "AU", "IE", "NZ"].includes(country)) {
-                        lang = "en"; // Engelska i engelsktalande länder
-                    } else {
-                        document.getElementById("language-message").style.display = "block";
-                        return;
-                    }
+            if (browserLang.startsWith("sv")) {
+                lang = "sv"; // Svenska om webbläsarspråket är svenska
+            }
 
-                    toggleLanguage(lang);
-                })
-                .catch(() => {
-                    toggleLanguage("en"); // Om något går fel, sätt till engelska
-                });
+            toggleLanguage(lang);
+
+            // Om det inte finns något sparat språk, använd IP-geolokalisering som backup
+            if (!localStorage.getItem("selectedLanguage")) {
+                fetch('https://ipapi.co/json/')
+                    .then(response => response.json())
+                    .then(data => {
+                        let country = data.country_code;
+                        if (country === "SE") {
+                            toggleLanguage("sv"); // Svenska om användaren är i Sverige
+                        }
+                    })
+                    .catch(() => toggleLanguage("en")); // Om det går fel, använd engelska
+            }
         }
 
         document.addEventListener("DOMContentLoaded", () => {
